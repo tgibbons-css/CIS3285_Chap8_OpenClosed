@@ -8,9 +8,9 @@ using System.Threading.Tasks;
 
 namespace AbstractTrader
 {
-    public class TradeProcessorVersion1 : TradeProcessor
+    public class TradeProcessorVersion1 : ITradeProcessor
     {
-        protected override IEnumerable<string> ReadTradeData(Stream stream)
+        private IEnumerable<string> ReadTradeData(Stream stream)
         {
             LogMessage("INFO: ReadTradeData version 1");
             var tradeData = new List<string>();
@@ -25,7 +25,7 @@ namespace AbstractTrader
             return tradeData;
         }
 
-        protected override IEnumerable<TradeRecord> ParseTrades(IEnumerable<string> tradeData)
+        private IEnumerable<TradeRecord> ParseTrades(IEnumerable<string> tradeData)
         {
             LogMessage("INFO: ParseTrades version 1");
             var trades = new List<TradeRecord>();
@@ -44,7 +44,7 @@ namespace AbstractTrader
             return trades;
         }
 
-        protected TradeRecord MapTradeDataToTradeRecord(string[] fields)
+        private TradeRecord MapTradeDataToTradeRecord(string[] fields)
         {
             var sourceCurrencyCode = fields[0].Substring(0, 3);
             var destinationCurrencyCode = fields[0].Substring(3, 3);
@@ -62,11 +62,27 @@ namespace AbstractTrader
             return trade;
         }
 
-        protected override void StoreTrades(IEnumerable<TradeRecord> trades)
+        private void StoreTrades(IEnumerable<TradeRecord> trades)
         {
             LogMessage("INFO: Simulating database connection in StoreTrades");
             // Not really connecting to database in this sample
             LogMessage("INFO: {0} trades processed", trades.Count());
+        }
+
+        private void LogMessage(string message, params object[] args)
+        {
+            Console.WriteLine(message, args);
+            using (StreamWriter logfile = File.AppendText("log.xml"))
+            {
+                logfile.WriteLine("<log>" + message + "</log>", args);
+            }
+        }
+
+        public void ProcessTrades(Stream stream)
+        {
+            var lines = ReadTradeData(stream);
+            var trades = ParseTrades(lines);
+            StoreTrades(trades);
         }
 
     }
