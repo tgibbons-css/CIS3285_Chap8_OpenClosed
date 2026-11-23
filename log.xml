@@ -1,0 +1,15 @@
+<log>INFO: Simulating ReadTradeData version 2</log>
+<log>INFO: Simulating ParseTrades version 2</log>
+<log>INFO: Simulating database connection in StoreTrades version 2</log>
+<log>INFO: 0 trades processed</log>
+<log>INFO: Using Updated Trade Processor Version 2</log>
+<log>INFO: Simulating database connection</log>
+<log>INFO: 4 trades processed</log>
+<log>INFO: Simulating ReadTradeData version 2</log>
+<log>INFO: Simulating ParseTrades version 2</log>
+<log>INFO: Simulating database connection in StoreTrades version 2</log>
+<log>INFO: 0 trades processed</log>
+<log>INFO: ReadTradeData version 1</log>
+<log>INFO: ParseTrades version 1</log>
+<log>INFO: Simulating database connection in StoreTrades</log>
+<log>INFO: 4 trades processed</log>
