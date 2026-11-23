@@ -1,0 +1,4 @@
+<log>INFO: Simulating ReadTradeData version 2</log>
+<log>INFO: Simulating ParseTrades version 2</log>
+<log>INFO: Simulating database connection in StoreTrades version 2</log>
+<log>INFO: 0 trades processed</log>
